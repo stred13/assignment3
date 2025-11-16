@@ -1,0 +1,16 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: assignment3
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookdb1?useSSL=false&serverTimezone=UTC
+    username: xsb
+    password: xsb-server
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
