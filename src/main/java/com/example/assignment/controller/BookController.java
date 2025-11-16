@@ -46,12 +46,20 @@ public class BookController {
                             @RequestBody String title){
         if (databaseNumber == 1){
             bookService.updateBookTitle(bookId,title);
+            return;
         }
         restClientConnect.updateBookTitle(databaseNumber,bookId,title);
     }
 
-    @PutMapping("/update-copy/{copy-id}")
-    public void updateCopy(@PathVariable("copy-id")Integer copyId, @RequestBody BookCopyDTO copyDTO){
-        bookCopyService.udpate(copyId,copyDTO.getVersion(),copyDTO.getPublishDate());
+    @PutMapping("/{database-number}/update-copy/{copy-id}")
+    public void updateCopy(
+            @PathVariable("database-number") Integer databaseNumber,
+            @PathVariable("copy-id")Integer copyId,
+            @RequestBody BookCopyDTO copyDTO){
+        if (databaseNumber == 1){
+            bookCopyService.udpate(copyId,copyDTO.getVersion(),copyDTO.getPublishDate());
+            return;
+        }
+        restClientConnect.updateBookCopy(databaseNumber,copyId,copyDTO);
     }
 }
